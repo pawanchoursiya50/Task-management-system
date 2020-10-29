@@ -1,0 +1,14 @@
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\bin\Debug\TaskManagerCore.dll.config
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\bin\Debug\TaskManagerCore.dll
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\bin\Debug\TaskManagerCore.pdb
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\bin\Debug\EntityFramework.dll
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\bin\Debug\EntityFramework.SqlServer.dll
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\bin\Debug\EntityFramework.xml
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\bin\Debug\EntityFramework.SqlServer.xml
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\obj\Debug\TaskManagerCore.csprojAssemblyReference.cache
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\obj\Debug\TaskManagerCore.csproj.CoreCompileInputs.cache
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\obj\Debug\TaskManagerCore.csproj.CopyComplete
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\obj\Debug\TaskManagerCore.dll
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\obj\Debug\TaskManagerCore.pdb
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\obj\Debug\TaskManagerCore.Migrations.v1_user.resources
+G:\Project\TaskManagementSystemAPI\TaskManagerCore\obj\Debug\TaskManagerCore.csproj.GenerateResource.cache
