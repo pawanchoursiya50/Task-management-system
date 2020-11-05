@@ -8,11 +8,10 @@ namespace TaskManagerWebAPI.DTOModels
 {
     public class MainTaskDTO
     {
-        public Guid Id { get; set; }
         public string TaskName { get; set; }
         public string Description { get; set; }
         public DateTime StartDateTime { get; set; }
         public string Status { get; set; }
-        public User User { get; set; }
+        //public User User { get; set; }
     }
 }

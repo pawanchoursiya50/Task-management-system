@@ -15,11 +15,27 @@ namespace TaskManagerCore.Repository
             //_dbContext = new TaskManagerDBContext();
             _dbContext = context;
         }
+
+        public IQueryable<MainTask> Get()
+        {
+            return _dbContext.MainTasks;
+        }
+
+        public MainTask GetById(Guid entityId)
+        {
+            return _dbContext.MainTasks.Find(entityId);
+        }
+
         public Guid Add(MainTask entity)
         {
-            Guid guid = _dbContext.MainTasks.Add(entity).Id;
+           // Guid guid = _dbContext.MainTasks.Add(entity).Id;
+             _dbContext.SaveChanges();
+             return new Guid("88D5BE18-A5EC-46A8-BBB2-06D223A11416");
+
+           /* user.Task.Add(entity);
             _dbContext.SaveChanges();
-            return guid;
+
+            return user.Id;*/
         }
 
         public void Delete(Guid entityId)
@@ -34,15 +50,6 @@ namespace TaskManagerCore.Repository
             throw new NotImplementedException();
         }
 
-        public IQueryable<MainTask> Get()
-        {
-            return _dbContext.MainTasks;
-        }
-
-        public MainTask GetById(Guid entityId)
-        {
-            return _dbContext.MainTasks.Find(entityId);
-        }
 
         public void Update(MainTask entity)
         {

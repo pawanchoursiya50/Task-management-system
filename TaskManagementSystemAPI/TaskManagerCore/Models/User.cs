@@ -14,5 +14,9 @@ namespace TaskManagerCore.Models
         public string Email { get; set; }
         public LoginCredential LoginCredential { get; set; }
         public ICollection<MainTask> Task { get; set; }
+        public User()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

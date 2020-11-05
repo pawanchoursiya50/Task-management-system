@@ -49,7 +49,7 @@ namespace TaskManagerWebAPI.Controllers
         }
 
 
-        [Route("{id}"), ResponseType(typeof(UserDTO))]
+        [Route("{UserId}"), ResponseType(typeof(UserDTO))]
         public IHttpActionResult Get(Guid id, bool includeLogin=false)
         {
             User user = _userService.GetUserById(id);
@@ -81,9 +81,10 @@ namespace TaskManagerWebAPI.Controllers
         [Route(""), ResponseType(typeof(Guid))]
         public IHttpActionResult Post(RegisterDTO register)
         {
+
             User user = new User()
             {
-                Id = register.Id,
+                //Id = register.Id,
                 FirstName = register.FirstName,
                 LastName = register.LastName,
                 DOB = register.DOB,
@@ -91,14 +92,16 @@ namespace TaskManagerWebAPI.Controllers
                 ContactNumber = register.ContactNumber,
                 Email = register.Email,
             };
+            Guid id = _userService.AddNewUser(user);
+
             LoginCredential LoginCredential = new LoginCredential()
             {
-                Id = register.Id,
+                Id = id,
                 UserName = register.UserName,
                 Password = register.UserPass
             };
 
-            Guid id = _userService.AddNewUser(user);
+            
             _loginService.AddNewLoginCredential(LoginCredential);
 
             return Ok(id);

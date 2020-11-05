@@ -16,5 +16,10 @@ namespace TaskManagerWebAPI.Service
         {
             _mainTaskRepo = repo;
         }
+
+        public Guid AddNewTask(User user,  MainTask newMainTask)
+        {
+            return _mainTaskRepo.Add(newMainTask);
+        }
     }
 }
