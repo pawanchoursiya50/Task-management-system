@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TaskManagerCore.Models
 {
-    class SubTask
+    public class SubTask
     {
         public Guid Id { get; set; }
         public string SubTaskName { get; set; }
         public string Description { get; set; }
         public DateTime StartDateTime { get; set; }
         public string Status { get; set; }
-        public Task Task { get; set; }
+        public MainTask Task { get; set; }
     }
 }

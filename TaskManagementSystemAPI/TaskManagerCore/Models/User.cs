@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TaskManagerCore.Models
 {
-    class User
+    public class User
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
@@ -12,7 +12,7 @@ namespace TaskManagerCore.Models
         public string City { get; set; }
         public long ContactNumber { get; set; }
         public string Email { get; set; }
-        public ICollection<Task> Task { get; set; }
         public LoginCredential LoginCredential { get; set; }
+        public ICollection<MainTask> Task { get; set; }
     }
 }
