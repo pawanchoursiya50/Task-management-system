@@ -19,16 +19,14 @@ namespace TaskManagerCore.Repository
         }
         public Guid Add(SubTask entity)
         {
-            Guid guid = _dbContext.SubTasks.Add(entity).Id;
+            Guid guid = _dbContext.SubTasks.Add(entity).MainTaskId;
             _dbContext.SaveChanges();
             return guid;
         }
 
-        public void Delete(Guid entityId)
+        public void Delete(SubTask entity)
         {
-            SubTask subTask = GetById(entityId);
-            _dbContext.SubTasks.Remove(subTask);
-            _dbContext.SaveChanges();
+            throw new NotImplementedException();
         }
 
         public IQueryable<SubTask> Get()
@@ -41,9 +39,9 @@ namespace TaskManagerCore.Repository
            return _dbContext.SubTasks.Find(entityId);
         }
 
-        public void Update(SubTask entity)
+        public void Update()
         {
-            _dbContext.SubTasks.AddOrUpdate(entity);
+            _dbContext.SaveChanges();
         }
     }
 }

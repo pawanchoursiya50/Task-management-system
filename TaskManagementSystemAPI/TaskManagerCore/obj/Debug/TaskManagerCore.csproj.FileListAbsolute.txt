@@ -99,3 +99,4 @@ G:\Task-management-system\TaskManagementSystemAPI\TaskManagerCore\bin\Debug\Syst
 G:\Task-management-system\TaskManagementSystemAPI\TaskManagerCore\bin\Debug\System.Text.Encodings.Web.xml
 G:\Task-management-system\TaskManagementSystemAPI\TaskManagerCore\obj\Debug\TaskManagerCore.Migrations.v1_allTablesCreated.resources
 G:\Task-management-system\TaskManagementSystemAPI\TaskManagerCore\obj\Debug\TaskManagerCore.csproj.GenerateResource.cache
+G:\Task-management-system\TaskManagementSystemAPI\TaskManagerCore\obj\Debug\TaskManagerCore.Migrations.v2_allTableIncludedForeignKey.resources

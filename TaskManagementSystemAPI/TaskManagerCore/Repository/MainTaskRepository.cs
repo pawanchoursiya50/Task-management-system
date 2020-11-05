@@ -17,19 +17,19 @@ namespace TaskManagerCore.Repository
 
         public IQueryable<MainTask> Get()
         {
-            return _dbContext.MainTasks;
+            return _dbContext.MainTasks.Include("User");
         }
 
         public MainTask GetById(Guid entityId)
         {
-            return _dbContext.MainTasks.Find(entityId);
+            return _dbContext.MainTasks.Include("User").Where(mainTask => mainTask.MainTaskId == entityId).FirstOrDefault();
         }
 
         public Guid Add(MainTask entity)
         {
-           // Guid guid = _dbContext.MainTasks.Add(entity).Id;
+             Guid guid = _dbContext.MainTasks.Add(entity).MainTaskId;
              _dbContext.SaveChanges();
-             return new Guid("88D5BE18-A5EC-46A8-BBB2-06D223A11416");
+             return guid;
 
            /* user.Task.Add(entity);
             _dbContext.SaveChanges();
@@ -37,16 +37,15 @@ namespace TaskManagerCore.Repository
             return user.Id;*/
         }
 
-        public void Delete(Guid entityId)
+        public void Update()
         {
-            MainTask MainTask = GetById(entityId);
-            _dbContext.MainTasks.Remove(MainTask);
             _dbContext.SaveChanges();
         }
 
-        public void Update(MainTask entity)
+        public void Delete(MainTask entity)
         {
-            _dbContext.MainTasks.AddOrUpdate(entity);
+            _dbContext.MainTasks.Remove(entity);
+            _dbContext.SaveChanges();
         }
     }
 }

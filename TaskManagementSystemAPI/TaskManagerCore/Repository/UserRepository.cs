@@ -22,26 +22,24 @@ namespace TaskManagerCore.Repository
 
         public User GetById(Guid entityId)
         {
-            return _dbContext.Users.Include("LoginCredential").Where(u => u.Id == entityId).FirstOrDefault();
+            return _dbContext.Users.Include("LoginCredential").Where(u => u.UserId == entityId).FirstOrDefault();
         }
 
         public Guid Add(User entity)
         {
-            Guid guid = _dbContext.Users.Add(entity).Id;
+            Guid guid = _dbContext.Users.Add(entity).UserId;
             _dbContext.SaveChanges();
             return guid;
         }
 
-        public void Update(User entity)
+        public void Update()
         {
-            //_dbContext.Users.AddOrUpdate(entity);
             _dbContext.SaveChanges();
         }
 
-        public void Delete(Guid entityId)
+        public void Delete(User entity)
         {
-            User user = _dbContext.Users.SingleOrDefault(u => u.Id == entityId);
-            _dbContext.Users.Remove(user);
+            _dbContext.Users.Remove(entity);
             _dbContext.SaveChanges();
         }
 

@@ -266,6 +266,8 @@
     <Compile Include="DTOModels\MainTaskDTO.cs" />
     <Compile Include="DTOModels\RegisterDTO.cs" />
     <Compile Include="DTOModels\SubTaskDTO.cs" />
+    <Compile Include="DTOModels\UpdateMainTaskDTO.cs" />
+    <Compile Include="DTOModels\UpdateUserDTO.cs" />
     <Compile Include="DTOModels\UserDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

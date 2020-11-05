@@ -32,14 +32,14 @@ namespace TaskManagerWebAPI.Service
            return  _userRepo.Add(user);
         }
 
-        public void UpdateUser(User user)
+        public void UpdateUser()
         {
-            _userRepo.Update(user);
+            _userRepo.Update();
         }
 
-        public void DeleteUser(Guid id)
+        public void DeleteUser(User user)
         {
-            _userRepo.Delete(id);
+            _userRepo.Delete(user);
         }
 
 

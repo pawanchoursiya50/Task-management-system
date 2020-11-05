@@ -12,9 +12,5 @@ namespace TaskManagerCore.Models
         public string Password { get; set; }
         public User User { get; set; }
 
-        /*public LoginCredential()
-        {
-            Id = Guid.NewGuid();
-        }*/
     }
 }

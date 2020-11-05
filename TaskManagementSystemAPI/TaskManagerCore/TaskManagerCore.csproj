@@ -227,11 +227,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
-    <Compile Include="DBContext\ITaskManagerDBContext.cs" />
     <Compile Include="DBContext\TaskManagerDBContext.cs" />
     <Compile Include="Migrations\202011041944407_v1_allTablesCreated.cs" />
     <Compile Include="Migrations\202011041944407_v1_allTablesCreated.designer.cs">
       <DependentUpon>202011041944407_v1_allTablesCreated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011051913064_v2_allTableIncludedForeignKey.cs" />
+    <Compile Include="Migrations\202011051913064_v2_allTableIncludedForeignKey.designer.cs">
+      <DependentUpon>202011051913064_v2_allTableIncludedForeignKey.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\LoginCredential.cs" />
@@ -252,6 +255,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011041944407_v1_allTablesCreated.resx">
       <DependentUpon>202011041944407_v1_allTablesCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011051913064_v2_allTableIncludedForeignKey.resx">
+      <DependentUpon>202011051913064_v2_allTableIncludedForeignKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

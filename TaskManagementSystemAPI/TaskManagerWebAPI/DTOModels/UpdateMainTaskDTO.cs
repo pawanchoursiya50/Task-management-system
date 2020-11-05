@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using TaskManagerCore.Models;
 
 namespace TaskManagerWebAPI.DTOModels
 {
-    public class MainTaskDTO
+    public class UpdateMainTaskDTO
     {
-        public Guid TaskId { get; set; }
-
         [Required]
         public string TaskName { get; set; }
 

@@ -30,7 +30,7 @@ namespace TaskManagerWebAPI.Controllers
             var users = _userService.GetAllUser().Select(user =>
             new UserDTO()
             {
-                Id = user.Id,
+                Id = user.UserId,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 DOB = user.DOB,
@@ -58,7 +58,7 @@ namespace TaskManagerWebAPI.Controllers
 
             UserDTO userDTO = new UserDTO()
             {
-                Id = user.Id,
+                Id = user.UserId,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 DOB = user.DOB,
@@ -88,62 +88,25 @@ namespace TaskManagerWebAPI.Controllers
 
             User user = new User()
             {
-                //Id = register.Id,
                 FirstName = register.FirstName,
                 LastName = register.LastName,
                 DOB = register.DOB,
                 City = register.City,
                 ContactNumber = register.ContactNumber,
                 Email = register.Email,
+                LoginCredential = new LoginCredential {
+                    UserName = register.UserName,
+                    Password = register.UserPass,
+                }
             };
-            Guid id = _userService.AddNewUser(user);
+            Guid userId = _userService.AddNewUser(user);
 
-            LoginCredential LoginCredential = new LoginCredential()
-            {
-                Id = id,
-                UserName = register.UserName,
-                Password = register.UserPass
-            };
-
-            
-            _loginService.AddNewLoginCredential(LoginCredential);
-
-            return Ok(id);
+            return Ok(userId);
         }
-
-        [Route("addTask"), ResponseType(typeof(Guid))]
-        public IHttpActionResult Post(Guid userId, MainTaskDTO mainTaskDTO)
-        {
-            User user = _userService.GetUserById(userId);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-
-            MainTask newTask = new MainTask()
-            {
-                TaskName = mainTaskDTO.TaskName,
-                Description = mainTaskDTO.Description,
-                StartDateTime = mainTaskDTO.StartDateTime,
-                Status = mainTaskDTO.Status,
-                User = user,
-            };
-            user.Task.Add(newTask);
-            Guid id = _userService.AddNewUser(user);
-
-            return Ok(id);
-        }
-
 
 
         [Route("UpdateUser")]
-        public IHttpActionResult PutUser(Guid userId, UserDTO userDTO)
+        public IHttpActionResult PutUser(Guid userId, UpdateUserDTO updateUserDTO)
         {
             User user = _userService.GetUserById(userId);
             if (user == null)
@@ -154,13 +117,14 @@ namespace TaskManagerWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            user.FirstName = userDTO.FirstName;
-            user.LastName = userDTO.LastName;
-            user.DOB = userDTO.DOB;
-            user.City = userDTO.City;
-            user.ContactNumber = userDTO.ContactNumber;
-            user.Email = userDTO.Email;
-            _userService.UpdateUser(user);
+            user.FirstName = updateUserDTO.FirstName;
+            user.LastName = updateUserDTO.LastName;
+            user.DOB = updateUserDTO.DOB;
+            user.City = updateUserDTO.City;
+            user.ContactNumber = updateUserDTO.ContactNumber;
+            user.Email = updateUserDTO.Email;
+
+            _userService.UpdateUser();
 
             return Ok(userId);
         }
@@ -179,7 +143,7 @@ namespace TaskManagerWebAPI.Controllers
 
             loginCredential.UserName = loginCredentialDTO.UserName;
             loginCredential.Password = loginCredentialDTO.Password;
-            _loginService.UpdateLoginCredential(loginCredential);
+            _loginService.UpdateLoginCredential();
 
             return Ok(userId);
         }
@@ -192,8 +156,7 @@ namespace TaskManagerWebAPI.Controllers
             if (user == null)
                 return BadRequest("User Id is wrong");
 
-            _userService.DeleteUser(userId);
-            //_loginService.DeleteLoginCredential(userId);
+            _userService.DeleteUser(user);
             return Ok(userId);
         }
     }

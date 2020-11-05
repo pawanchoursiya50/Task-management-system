@@ -32,21 +32,14 @@ namespace TaskManagerCore.Repository
             return guid;
         }
 
-        public void Update(LoginCredential entity)
+        public void Update()
         {
-            //_dbContext.LoginCredentials.AddOrUpdate(entity);
             _dbContext.SaveChanges();
         }
 
-        public void Delete(Guid entityId)
+        public void Delete(LoginCredential entity)
         {
-
-            LoginCredential loginCredential = GetById(entityId);
-         //   _dbContext.Entry(loginCredential).State = System.Data.Entity.EntityState.Deleted;
-            _dbContext.LoginCredentials.Remove(loginCredential);
-            _dbContext.SaveChanges();
+            throw new NotImplementedException();
         }
-
-
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using TaskManagerCore.Models;
 using TaskManagerWebAPI.DTOModels;
 using TaskManagerWebAPI.Service;
@@ -20,7 +21,7 @@ namespace TaskManagerWebAPI.Controllers
             _userService = userservice;
         }
 
-        [Route("")]
+        [Route(""), ResponseType(typeof(MainTaskDTO[]))]
         public IHttpActionResult Get(Guid userId)
         {
             User user = _userService.GetUserById(userId);
@@ -29,14 +30,43 @@ namespace TaskManagerWebAPI.Controllers
                 return NotFound();
             }
 
+            var mainTasks = _mainTaskService.GetAllTask(userId).Select(mainTask => 
+            new MainTaskDTO{ 
+                TaskId = mainTask.MainTaskId,
+                TaskName = mainTask.TaskName,
+                Description = mainTask.Description,
+                StartDateTime = mainTask.StartDateTime,
+                Status = mainTask.Status,
+            }).ToList();
 
-            return Ok();
+            return Ok(mainTasks);
         }
 
-        [Route("{taskId}")]
-        public IHttpActionResult Get(Guid userId, Guid taskId)
+        [Route("{mainTaskId}"), ResponseType(typeof(MainTaskDTO))]
+        public IHttpActionResult Get(Guid userId, Guid mainTaskId)
         {
-            return Ok();
+            /*User user = _userService.GetUserById(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }*/
+
+            MainTask mainTask = _mainTaskService.GetTaskById(mainTaskId);
+            if(mainTask == null)
+            {
+                return NotFound();
+            }
+
+            MainTaskDTO mainTaskDTO = new MainTaskDTO()
+            {
+                TaskId = mainTask.MainTaskId,
+                TaskName = mainTask.TaskName,
+                Description = mainTask.Description,
+                StartDateTime = mainTask.StartDateTime,
+                Status = mainTask.Status,
+            };
+
+            return Ok(mainTaskDTO);
         }
 
         [Route("AddTask")]
@@ -47,8 +77,10 @@ namespace TaskManagerWebAPI.Controllers
             {
                 return NotFound();
             }
-
-            
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
             MainTask newTask = new MainTask()
             {
@@ -56,27 +88,40 @@ namespace TaskManagerWebAPI.Controllers
                 Description = mainTaskDTO.Description,
                 StartDateTime = mainTaskDTO.StartDateTime,
                 Status = mainTaskDTO.Status,
-                //User = user,
+                UserId = user.UserId,
             };
-             user.Task.Add(newTask);
+             Guid mainTaskId =_mainTaskService.AddNewTask(newTask);
+            return Ok(mainTaskId);
+        }
 
-             _mainTaskService.AddNewTask(user, newTask);
+        [Route("UpdateTask/{mainTaskId}")]
+        public IHttpActionResult Put(Guid userId, Guid mainTaskId, UpdateMainTaskDTO updateMainTaskDTO)
+        {
+            MainTask mainTask = _mainTaskService.GetTaskById(mainTaskId);
+            if (mainTask == null)
+            {
+                return NotFound();
+            }
+            mainTask.TaskName = updateMainTaskDTO.TaskName;
+            mainTask.Description = updateMainTaskDTO.Description;
+            mainTask.StartDateTime = updateMainTaskDTO.StartDateTime;
+            mainTask.Status = updateMainTaskDTO.Status;
 
-            //Guid id = _mainTaskService.AddNewTask(user, newTask);
-
+            _mainTaskService.UpdateMainTask();
             return Ok();
         }
 
-        [Route("UpdateTask/{taskId}")]
-        public IHttpActionResult Put(Guid userId, Guid taskId, MainTaskDTO mainTaskDTO)
-        {
-            return Ok();
-        }
 
-
-        [Route("DeleteTask/{taskId}")]
-        public IHttpActionResult Delete(Guid userId, Guid taskId)
+        [Route("DeleteTask/{mainTaskId}")]
+        public IHttpActionResult Delete(Guid userId, Guid mainTaskId)
         {
+            MainTask mainTask = _mainTaskService.GetTaskById(mainTaskId);
+            if (mainTask == null)
+            {
+                return NotFound();
+            }
+            _mainTaskService.Delete(mainTask);
+
             return Ok();
         }
     }

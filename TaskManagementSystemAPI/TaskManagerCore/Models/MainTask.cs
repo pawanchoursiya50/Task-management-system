@@ -10,21 +10,27 @@ namespace TaskManagerCore.Models
 {
     public class MainTask
     {
-
-        //[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-        public string TaskName { get; set; }
-        public string Description { get; set; }
-        public DateTime StartDateTime { get; set; }
-        public string Status { get; set; }
-        public User User { get; set; }
-        public ICollection<SubTask> SubTask { get; set; }
-
         public MainTask()
         {
-            Id = new Guid();
+            MainTaskId = Guid.NewGuid();
         }
 
+        public Guid MainTaskId { get; set; }
+
+        [Required]
+        public string TaskName { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
+        public DateTime StartDateTime { get; set; }
+
+        [Required]
+        public string Status { get; set; }
+
+        public Guid UserId { get; set; }
+        public User User { get; set; }
+        public ICollection<SubTask> SubTask { get; set; }
 
     }
 }

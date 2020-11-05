@@ -32,14 +32,14 @@ namespace TaskManagerWebAPI.Service
             return _loginRepo.Add(login);
         }
 
-        public void UpdateLoginCredential(LoginCredential login)
+        public void UpdateLoginCredential()
         {
-            _loginRepo.Update(login);
+            _loginRepo.Update();
         }
 
-        public void DeleteLoginCredential(Guid id)
+        public void DeleteLoginCredential(LoginCredential loginCredential)
         {
-            _loginRepo.Delete(id);
+            _loginRepo.Delete(loginCredential);
         }
     }
 }

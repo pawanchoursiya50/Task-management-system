@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-namespace TaskManagerCore.Models
+namespace TaskManagerWebAPI.DTOModels
 {
-    public class User
+    public class UpdateUserDTO
     {
-        public User()
-        {
-            UserId = Guid.NewGuid();
-        }
-        public Guid UserId { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -18,6 +15,7 @@ namespace TaskManagerCore.Models
         [Required]
         public string LastName { get; set; }
 
+        [Required]
         public DateTime DOB { get; set; }
 
         [Required]
@@ -28,9 +26,6 @@ namespace TaskManagerCore.Models
 
         [Required]
         public string Email { get; set; }
-
-        public LoginCredential LoginCredential { get; set; }
-        public ICollection<MainTask> Task { get; set; }
 
     }
 }

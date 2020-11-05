@@ -6,11 +6,11 @@ namespace TaskManagerCore.Repository
 {
     public interface IRepository<T> where T : class
     {
-        Guid Add(T entity);
-        void Update(T entity);
-        void Delete(Guid entityId);
         IQueryable<T> Get();
         T GetById(Guid entityId);
+        Guid Add(T entity);
+        void Update();
+        void Delete(T entity);
 
     }
 }
