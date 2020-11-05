@@ -13,9 +13,9 @@ namespace TaskManagerCore.Repository
     class SubTaskRepository : IRepository<SubTask>
     {
         private TaskManagerDBContext _dbContext;
-        public SubTaskRepository()
+        public SubTaskRepository(TaskManagerDBContext context)
         {
-            _dbContext = new TaskManagerDBContext();
+            _dbContext = context;
         }
         public Guid Add(SubTask entity)
         {
@@ -29,11 +29,6 @@ namespace TaskManagerCore.Repository
             SubTask subTask = GetById(entityId);
             _dbContext.SubTasks.Remove(subTask);
             _dbContext.SaveChanges();
-        }
-
-        public IQueryable<SubTask> Find(Expression<Func<SubTask, bool>> specification)
-        {
-            throw new NotImplementedException();
         }
 
         public IQueryable<SubTask> Get()

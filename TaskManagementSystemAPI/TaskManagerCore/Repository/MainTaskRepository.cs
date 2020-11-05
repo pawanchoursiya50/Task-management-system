@@ -12,7 +12,6 @@ namespace TaskManagerCore.Repository
         private TaskManagerDBContext _dbContext;
         public MainTaskRepository(TaskManagerDBContext context)
         {
-            //_dbContext = new TaskManagerDBContext();
             _dbContext = context;
         }
 
@@ -44,12 +43,6 @@ namespace TaskManagerCore.Repository
             _dbContext.MainTasks.Remove(MainTask);
             _dbContext.SaveChanges();
         }
-
-        public IQueryable<MainTask> Find(Expression<Func<MainTask, bool>> specification)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public void Update(MainTask entity)
         {

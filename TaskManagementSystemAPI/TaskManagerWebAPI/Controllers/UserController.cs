@@ -81,6 +81,10 @@ namespace TaskManagerWebAPI.Controllers
         [Route(""), ResponseType(typeof(Guid))]
         public IHttpActionResult Post(RegisterDTO register)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             User user = new User()
             {
@@ -107,12 +111,48 @@ namespace TaskManagerWebAPI.Controllers
             return Ok(id);
         }
 
+        [Route("addTask"), ResponseType(typeof(Guid))]
+        public IHttpActionResult Post(Guid userId, MainTaskDTO mainTaskDTO)
+        {
+            User user = _userService.GetUserById(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
+            MainTask newTask = new MainTask()
+            {
+                TaskName = mainTaskDTO.TaskName,
+                Description = mainTaskDTO.Description,
+                StartDateTime = mainTaskDTO.StartDateTime,
+                Status = mainTaskDTO.Status,
+                User = user,
+            };
+            user.Task.Add(newTask);
+            Guid id = _userService.AddNewUser(user);
+
+            return Ok(id);
+        }
+
+
+
         [Route("UpdateUser")]
         public IHttpActionResult PutUser(Guid userId, UserDTO userDTO)
         {
             User user = _userService.GetUserById(userId);
             if (user == null)
                 return NotFound();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             user.FirstName = userDTO.FirstName;
             user.LastName = userDTO.LastName;
@@ -128,7 +168,11 @@ namespace TaskManagerWebAPI.Controllers
         [Route("UpdateLogin")]
         public IHttpActionResult PutLogin(Guid userId, LoginCredentialDTO loginCredentialDTO)
         {
-            
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             LoginCredential loginCredential = _loginService.GetLoginCredentialById(userId);
             if (loginCredential == null)
                 return NotFound();

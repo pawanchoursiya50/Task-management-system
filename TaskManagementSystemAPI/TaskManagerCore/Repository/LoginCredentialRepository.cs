@@ -12,7 +12,6 @@ namespace TaskManagerCore.Repository
         private TaskManagerDBContext _dbContext;
         public LoginCredentialRepository(TaskManagerDBContext context)
         {
-            //_dbContext = new TaskManagerDBContext();
             _dbContext = context;
         }
 
@@ -48,10 +47,6 @@ namespace TaskManagerCore.Repository
             _dbContext.SaveChanges();
         }
 
-        public IQueryable<LoginCredential> Find(Expression<Func<LoginCredential, bool>> specification)
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

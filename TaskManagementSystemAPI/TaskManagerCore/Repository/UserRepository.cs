@@ -12,7 +12,6 @@ namespace TaskManagerCore.Repository
         private TaskManagerDBContext _dbContext;
         public UserRepository(TaskManagerDBContext context)
         {
-            //_dbContext = new TaskManagerDBContext();
             _dbContext = context;
         }
 
@@ -44,11 +43,6 @@ namespace TaskManagerCore.Repository
             User user = _dbContext.Users.SingleOrDefault(u => u.Id == entityId);
             _dbContext.Users.Remove(user);
             _dbContext.SaveChanges();
-        }
-
-        public IQueryable<User> Find(Expression<Func<User, bool>> specification)
-        {
-            throw new NotImplementedException();
         }
 
     }
