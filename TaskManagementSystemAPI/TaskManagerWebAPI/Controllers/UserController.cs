@@ -49,7 +49,7 @@ namespace TaskManagerWebAPI.Controllers
         }
 
 
-        [Route("{UserId}"), ResponseType(typeof(UserDTO))]
+        [Route("{userId}"), ResponseType(typeof(UserDTO))]
         public IHttpActionResult Get(Guid id, bool includeLogin=false)
         {
             User user = _userService.GetUserById(id);
@@ -105,7 +105,7 @@ namespace TaskManagerWebAPI.Controllers
         }
 
 
-        [Route("UpdateUser")]
+        [Route("UpdateUser/{userId}")]
         public IHttpActionResult PutUser(Guid userId, UpdateUserDTO updateUserDTO)
         {
             User user = _userService.GetUserById(userId);
@@ -129,7 +129,7 @@ namespace TaskManagerWebAPI.Controllers
             return Ok(userId);
         }
 
-        [Route("UpdateLogin")]
+        [Route("UpdateLogin/{userId}")]
         public IHttpActionResult PutLogin(Guid userId, LoginCredentialDTO loginCredentialDTO)
         {
             if (!ModelState.IsValid)
@@ -149,7 +149,7 @@ namespace TaskManagerWebAPI.Controllers
         }
 
 
-        [Route(""), ResponseType(typeof(Guid))]
+        [Route("{userId}"), ResponseType(typeof(Guid))]
         public IHttpActionResult DELETE(Guid userId)
         {
             User user = _userService.GetUserById(userId);

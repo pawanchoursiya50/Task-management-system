@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TaskManagerCore.Models;
@@ -45,11 +42,6 @@ namespace TaskManagerWebAPI.Controllers
         [Route("{mainTaskId}"), ResponseType(typeof(MainTaskDTO))]
         public IHttpActionResult Get(Guid userId, Guid mainTaskId)
         {
-            /*User user = _userService.GetUserById(userId);
-            if (user == null)
-            {
-                return NotFound();
-            }*/
 
             MainTask mainTask = _mainTaskService.GetTaskById(mainTaskId);
             if(mainTask == null)
@@ -69,7 +61,7 @@ namespace TaskManagerWebAPI.Controllers
             return Ok(mainTaskDTO);
         }
 
-        [Route("AddTask")]
+        [Route("addTask")]
         public IHttpActionResult Post(Guid userId, MainTaskDTO mainTaskDTO)
         {
             User user = _userService.GetUserById(userId);
@@ -94,7 +86,7 @@ namespace TaskManagerWebAPI.Controllers
             return Ok(mainTaskId);
         }
 
-        [Route("UpdateTask/{mainTaskId}")]
+        [Route("updateTask/{mainTaskId}")]
         public IHttpActionResult Put(Guid userId, Guid mainTaskId, UpdateMainTaskDTO updateMainTaskDTO)
         {
             MainTask mainTask = _mainTaskService.GetTaskById(mainTaskId);
@@ -112,7 +104,7 @@ namespace TaskManagerWebAPI.Controllers
         }
 
 
-        [Route("DeleteTask/{mainTaskId}")]
+        [Route("deleteTask/{mainTaskId}")]
         public IHttpActionResult Delete(Guid userId, Guid mainTaskId)
         {
             MainTask mainTask = _mainTaskService.GetTaskById(mainTaskId);
@@ -121,8 +113,7 @@ namespace TaskManagerWebAPI.Controllers
                 return NotFound();
             }
             _mainTaskService.Delete(mainTask);
-
-            return Ok();
+            return Ok(mainTask.MainTaskId);
         }
     }
 }

@@ -13,7 +13,6 @@ namespace TaskManagerWebAPI.App_Start
     using Ninject.Web.Common.WebHost;
     using TaskManagerCore.Models;
     using TaskManagerCore.Repository;
-    using TaskManagerWebAPI.Service;
 
     public static class NinjectWebCommon 
     {
@@ -64,10 +63,10 @@ namespace TaskManagerWebAPI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-           // kernel.Bind<UserService>.To<UserService>();
-            kernel.Bind<IRepository<User>>().To<UserRepository>();
             kernel.Bind<IRepository<LoginCredential>>().To<LoginCredentialRepository>();
+            kernel.Bind<IRepository<User>>().To<UserRepository>();
             kernel.Bind<IRepository<MainTask>>().To<MainTaskRepository>();
+            kernel.Bind<IRepository<SubTask>>().To<SubTaskRepository>();
         }
     }
 }
