@@ -39,7 +39,7 @@ namespace TaskManagerCore.Repository
 
         public void Delete(LoginCredential entity)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

@@ -260,17 +260,19 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SubTaskController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="DTOModels\LoginCredentialDTO.cs" />
-    <Compile Include="DTOModels\MainTaskDTO.cs" />
-    <Compile Include="DTOModels\RegisterDTO.cs" />
+    <Compile Include="DTOModels\LoginDTO\ForgetDTO.cs" />
+    <Compile Include="DTOModels\LoginDTO\LoginDTO.cs" />
+    <Compile Include="DTOModels\MainTaskDTO\MainTaskDTO.cs" />
+    <Compile Include="DTOModels\UserDTO\RegisterUserDTO.cs" />
     <Compile Include="DTOModels\SubTaskDTO\AddSubTaskDTO.cs" />
     <Compile Include="DTOModels\SubTaskDTO\SendSubTaskDTO.cs" />
-    <Compile Include="DTOModels\UpdateMainTaskDTO.cs" />
-    <Compile Include="DTOModels\UpdateUserDTO.cs" />
-    <Compile Include="DTOModels\UserDTO.cs" />
+    <Compile Include="DTOModels\MainTaskDTO\UpdateMainTaskDTO.cs" />
+    <Compile Include="DTOModels\UserDTO\UpdateUserDTO.cs" />
+    <Compile Include="DTOModels\UserDTO\SendUserDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TaskManagerCore.Models;
-using TaskManagerCore.Repository;
-using TaskManagerWebAPI.DTOModels;
+using TaskManagerWebAPI.DTOModels.UserDTO;
+using TaskManagerWebAPI.DTOModels.LoginDTO;
 using TaskManagerWebAPI.Service;
 
 namespace TaskManagerWebAPI.Controllers
@@ -24,11 +21,11 @@ namespace TaskManagerWebAPI.Controllers
             _loginService = loginService;
         }
 
-        [Route(""), ResponseType(typeof(UserDTO[]))]
-        public IHttpActionResult Get(bool includeLogin = false)
+        [Route(""), ResponseType(typeof(SendUserDTO[]))]
+        public IHttpActionResult Get()
         {
             var users = _userService.GetAllUser().Select(user =>
-            new UserDTO()
+            new SendUserDTO()
             {
                 Id = user.UserId,
                 FirstName = user.FirstName,
@@ -37,26 +34,20 @@ namespace TaskManagerWebAPI.Controllers
                 City = user.City,
                 ContactNumber = user.ContactNumber,
                 Email = user.Email,
-                LoginCredential = (includeLogin == false) ? null : new LoginCredentialDTO()
-                {
-                    Id = user.LoginCredential.Id,
-                    UserName = user.LoginCredential.UserName,
-                    Password = user.LoginCredential.Password
-                }
             }).ToList() ;
 
             return Ok(users);
         }
 
 
-        [Route("{userId}"), ResponseType(typeof(UserDTO))]
-        public IHttpActionResult Get(Guid id, bool includeLogin=false)
+        [Route("{userId}"), ResponseType(typeof(SendUserDTO))]
+        public IHttpActionResult Get(Guid userId)
         {
-            User user = _userService.GetUserById(id);
+            User user = _userService.GetUserById(userId);
             if (user == null)
                 return NotFound();
 
-            UserDTO userDTO = new UserDTO()
+            SendUserDTO userDTO = new SendUserDTO()
             {
                 Id = user.UserId,
                 FirstName = user.FirstName,
@@ -65,12 +56,6 @@ namespace TaskManagerWebAPI.Controllers
                 City = user.City,
                 ContactNumber = user.ContactNumber,
                 Email = user.Email,
-                LoginCredential = (includeLogin == false)? null : new LoginCredentialDTO()
-                {
-                    Id = user.LoginCredential.Id,
-                    UserName = user.LoginCredential.UserName,
-                    Password = user.LoginCredential.Password
-                }
             };
 
             return Ok(userDTO);
@@ -78,8 +63,8 @@ namespace TaskManagerWebAPI.Controllers
         }
 
 
-        [Route(""), ResponseType(typeof(Guid))]
-        public IHttpActionResult Post(RegisterDTO register)
+        [Route("addUser"), ResponseType(typeof(Guid))]
+        public IHttpActionResult Post(RegisterUserDTO register)
         {
             if (!ModelState.IsValid)
             {
@@ -95,7 +80,7 @@ namespace TaskManagerWebAPI.Controllers
                 ContactNumber = register.ContactNumber,
                 Email = register.Email,
                 LoginCredential = new LoginCredential {
-                    UserName = register.UserName,
+                    UserName = register.Email,
                     Password = register.UserPass,
                 }
             };
@@ -105,7 +90,7 @@ namespace TaskManagerWebAPI.Controllers
         }
 
 
-        [Route("UpdateUser/{userId}")]
+        [Route("updateUser/{userId}")]
         public IHttpActionResult PutUser(Guid userId, UpdateUserDTO updateUserDTO)
         {
             User user = _userService.GetUserById(userId);
@@ -129,27 +114,8 @@ namespace TaskManagerWebAPI.Controllers
             return Ok(userId);
         }
 
-        [Route("UpdateLogin/{userId}")]
-        public IHttpActionResult PutLogin(Guid userId, LoginCredentialDTO loginCredentialDTO)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            LoginCredential loginCredential = _loginService.GetLoginCredentialById(userId);
-            if (loginCredential == null)
-                return NotFound();
-
-            loginCredential.UserName = loginCredentialDTO.UserName;
-            loginCredential.Password = loginCredentialDTO.Password;
-            _loginService.UpdateLoginCredential();
-
-            return Ok(userId);
-        }
-
-
-        [Route("{userId}"), ResponseType(typeof(Guid))]
+        [Route("deleteUser/{userId}"), ResponseType(typeof(Guid))]
         public IHttpActionResult DELETE(Guid userId)
         {
             User user = _userService.GetUserById(userId);

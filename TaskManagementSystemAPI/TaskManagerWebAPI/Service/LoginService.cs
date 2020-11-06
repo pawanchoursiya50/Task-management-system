@@ -27,19 +27,9 @@ namespace TaskManagerWebAPI.Service
             return _loginRepo.GetById(id);
         }
 
-        public Guid AddNewLoginCredential(LoginCredential login)
-        {
-            return _loginRepo.Add(login);
-        }
-
         public void UpdateLoginCredential()
         {
             _loginRepo.Update();
-        }
-
-        public void DeleteLoginCredential(LoginCredential loginCredential)
-        {
-            _loginRepo.Delete(loginCredential);
         }
     }
 }

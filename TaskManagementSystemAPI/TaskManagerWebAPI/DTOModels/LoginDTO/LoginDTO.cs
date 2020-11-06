@@ -5,12 +5,10 @@ using System.Linq;
 using System.Web;
 using TaskManagerCore.Models;
 
-namespace TaskManagerWebAPI.DTOModels
+namespace TaskManagerWebAPI.DTOModels.LoginDTO
 {
-    public class LoginCredentialDTO
+    public class LoginDTO
     {
-        public Guid Id { get; set; }
-
         [Required]
         public string UserName { get; set; }
 

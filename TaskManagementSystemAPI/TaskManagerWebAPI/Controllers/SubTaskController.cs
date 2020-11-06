@@ -3,7 +3,6 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TaskManagerCore.Models;
-using TaskManagerWebAPI.DTOModels;
 using TaskManagerWebAPI.DTOModels.SubTaskDTO;
 using TaskManagerWebAPI.Service;
 

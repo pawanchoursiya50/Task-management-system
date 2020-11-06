@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace TaskManagerWebAPI.DTOModels
+namespace TaskManagerWebAPI.DTOModels.SubTaskDTO
 {
     public class AddSubTaskDTO
     {

@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using TaskManagerWebAPI.DTOModels.LoginDTO;
 
-namespace TaskManagerWebAPI.DTOModels
+namespace TaskManagerWebAPI.DTOModels.UserDTO
 {
-    public class UpdateUserDTO
+    public class SendUserDTO
     {
+        public Guid Id { get; set; }
 
         [Required]
         public string FirstName { get; set; }

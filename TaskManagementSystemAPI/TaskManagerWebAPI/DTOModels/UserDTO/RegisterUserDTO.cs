@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using TaskManagerCore.Models;
 
-namespace TaskManagerWebAPI.DTOModels
+namespace TaskManagerWebAPI.DTOModels.UserDTO
 {
-    public class UserDTO
+    public class RegisterUserDTO
     {
-        public Guid Id { get; set; }
-
         [Required]
         public string FirstName { get; set; }
 
@@ -29,7 +26,10 @@ namespace TaskManagerWebAPI.DTOModels
         [Required]
         public string Email { get; set; }
 
-        public LoginCredentialDTO LoginCredential { get; set; }
+        [Required]
+        public string UserName { get; set; }
 
+        [Required]
+        public string UserPass { get; set; }
     }
 }
