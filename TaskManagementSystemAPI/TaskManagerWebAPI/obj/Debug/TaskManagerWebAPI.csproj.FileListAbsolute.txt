@@ -138,3 +138,6 @@ G:\Task-management-system\TaskManagementSystemAPI\TaskManagerWebAPI\bin\Microsof
 G:\Task-management-system\TaskManagementSystemAPI\TaskManagerWebAPI\bin\System.Diagnostics.DiagnosticSource.xml
 G:\Task-management-system\TaskManagementSystemAPI\TaskManagerWebAPI\bin\System.Text.Encodings.Web.xml
 G:\Task-management-system\TaskManagementSystemAPI\TaskManagerWebAPI\bin\Swashbuckle.Core.dll
+G:\Task-management-system\TaskManagementSystemAPI\TaskManagerWebAPI\bin\System.Web.Cors.dll
+G:\Task-management-system\TaskManagementSystemAPI\TaskManagerWebAPI\bin\System.Web.Http.Cors.dll
+G:\Task-management-system\TaskManagementSystemAPI\TaskManagerWebAPI\bin\System.Web.Http.Cors.xml

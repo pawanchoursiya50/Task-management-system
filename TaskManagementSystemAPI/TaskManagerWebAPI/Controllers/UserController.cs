@@ -6,10 +6,12 @@ using TaskManagerCore.Models;
 using TaskManagerWebAPI.DTOModels.UserDTO;
 using TaskManagerWebAPI.DTOModels.LoginDTO;
 using TaskManagerWebAPI.Service;
+using System.Web.Http.Cors;
 
 namespace TaskManagerWebAPI.Controllers
 {
     [RoutePrefix("api/v1/user")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserController : ApiController
     {
         private UserService _userService;
@@ -80,7 +82,7 @@ namespace TaskManagerWebAPI.Controllers
                 ContactNumber = register.ContactNumber,
                 Email = register.Email,
                 LoginCredential = new LoginCredential {
-                    UserName = register.Email,
+                    UserName = register.UserName,
                     Password = register.UserPass,
                 }
             };
